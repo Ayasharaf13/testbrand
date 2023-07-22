@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -20,19 +21,21 @@ class HomeViewModel {
 
 class HomeViewModel(private val remoteSource: InterfaceBrands) : ViewModel() {
 
-    private val _brandsList: MutableStateFlow<ApiState> = MutableStateFlow(ApiState.Loading)
-    val accessBrandsList: StateFlow<ApiState> get() = _brandsList
+    private val _brandsList = MutableStateFlow<ApiState>(ApiState.Loading)
+    val accessBrandsList: StateFlow<ApiState> = _brandsList
 
-    fun getBrands() {
-        viewModelScope.launch {
+    init {
+        getBrands()
+    }
+
+ fun getBrands() {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
-                val brands = withContext(Dispatchers.IO) {
-                    remoteSource.getBrands()
-                }
-                _brandsList.value = ApiState.Success(brands)
-            } catch (error: Throwable) {
-                _brandsList.value = ApiState.Failure(error)
+                _brandsList.value = ApiState.Success(remoteSource.getBrands().first())
+            } catch (e: Throwable) {
+                _brandsList.value = ApiState.Failure(e)
             }
         }
     }
 }
+
