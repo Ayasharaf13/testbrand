@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">TestAPI</string>
     <string name="brand">brand</string>
+    <string name="no_brand_found">no_brand_found</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="category_search_hint">category_search_hint</string>
 </resources>

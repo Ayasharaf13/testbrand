@@ -5,5 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface InterfaceBrands {
     suspend fun getBrands() : Flow<BrandList?>
+   //suspend fun getBrands(): Flow<Result<BrandList?>>
+
 
 }

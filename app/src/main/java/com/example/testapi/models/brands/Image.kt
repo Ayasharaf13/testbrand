@@ -1,7 +1,6 @@
 package com.example.testapi.models.brands
 
-
-data class Image(
+public  data class Image(
     val alt: Any?,
     val created_at: String,
     val height: Int,

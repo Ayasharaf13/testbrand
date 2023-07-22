@@ -1,9 +1,9 @@
 package com.example.testapi.models.brands
 
-import android.media.Image
+
 
 data class SmartCollection(
-    //val admin_graphql_api_id: String,
+    val admin_graphql_api_id: String,
     val body_html: String,
     val disjunctive: Boolean,
     val handle: String,
